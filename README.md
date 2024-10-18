@@ -1,36 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Rule Engine
+
+## Overview
+
+The Rule Engine is a web-based application designed to facilitate the definition, evaluation, and visualization of logical rules. This application empowers users to create complex rules and understand their structure through visual representation, making it a valuable tool for both developers and non-technical users.
+
+This project utilizes React for the front end and integrates the `react-d3-tree` library for visualizing the rules in a tree-like format. Users can input rules based on specific criteria, and the application will convert these rules into an Abstract Syntax Tree (AST) for visualization.
+
+**Live Demo:** [View the Live Application](YOUR_LIVE_LINK_HERE)
+
+## Features
+
+- **Define Rules**: Create rules based on logical conditions using a simple input format.
+- **Combine Rules**: Combine multiple rules using logical operators (AND, OR) to form complex conditions.
+- **Evaluate Rules**: Evaluate defined rules against specified data to check their validity.
+- **Visualize Rules**: Dynamic visualization of rules in an Abstract Syntax Tree (AST) format for easier comprehension and navigation.
+- **Interactive Tree Navigation**: Users can navigate, zoom in, and out of the tree representation of rules.
+
+## Prerequisites
+
+Make sure you have the following installed on your machine:
+
+- [Node.js](https://nodejs.org/) (v14 or later)
+- [npm](https://www.npmjs.com/get-npm) (Node package manager)
 
 ## Getting Started
 
-First, run the development server:
+Follow these steps to clone the project and run it on your local machine:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. **Clone the Repository**
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+   Open your terminal and run the following command to clone the repository:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+   ```bash
+   git clone https://github.com/Jashank2003/rule_engine_ast.git
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+   cd YOUR_REPOSITORY_NAME
+   
+   npm install
 
-## Learn More
+   npm run dev
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

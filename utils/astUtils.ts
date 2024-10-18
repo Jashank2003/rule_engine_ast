@@ -1,7 +1,7 @@
 
 type NodeType = 'operator' | 'operand';
 
-// Interface for an AST Node
+// interface for an AST Node
 interface ASTNode {
   type: NodeType;
   left?: ASTNode | null;
@@ -85,12 +85,12 @@ function parseTokens(tokens: string[]): ASTNode {
     applyOperator(tokenStack.pop()!);
   }
 
-  return outputQueue[0]; // The final AST
+  return outputQueue[0]; // final AST
 }
 
 // Function to evaluate an AST against user data
 export function evaluateRule(ast: ASTNode, userData: Record<string, any>): boolean | number | string {
-    // If it's an operand
+    // if its  operand
     if (ast.type === 'operand') {
       
         if (typeof ast.value === 'string' && !isNaN(Number(ast.value))) {
@@ -114,12 +114,12 @@ export function evaluateRule(ast: ASTNode, userData: Record<string, any>): boole
         throw new Error(`Invalid operand value: ${ast.value}`);
     }
 
-    // If it's an operator, evaluate the left and right nodes
+    // if its  operator
     if (ast.type === 'operator') {
         const leftValue = evaluateRule(ast.left as ASTNode, userData);  
         const rightValue = evaluateRule(ast.right as ASTNode, userData);        
         
-        // Handle logical operators (AND, OR)
+        //  logical operators (AND, OR)
         if (ast.value === 'AND') {
             return Boolean(leftValue) && Boolean(rightValue);
         } else if (ast.value === 'OR') {
