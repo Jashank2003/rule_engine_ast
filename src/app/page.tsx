@@ -55,7 +55,7 @@ function Page() {
                 <p className="pl-4">Input custom rules and receive instant evaluation with high precision.</p>
               </div>
             </Link>
-            <Link href="#visualizeTree" className="bg-black p-8 rounded-md text-left shadow-lg shadow-gray-800 transition-transform transform hover:scale-105 h-64 flex flex-col justify-between hover:border-t-2 hover:border-l-2" target='_blank'>
+            <Link href="/visualrule" className="bg-black p-8 rounded-md text-left shadow-lg shadow-gray-800 transition-transform transform hover:scale-105 h-64 flex flex-col justify-between hover:border-t-2 hover:border-l-2" target='_blank'>
               <div>
                 <h3 className="text-2xl font-bold mb-8 pl-4">Syntax Tree Visualization</h3>
                 <p className="pl-4">Visualize complex rules with our intuitive syntax tree displays.</p>
