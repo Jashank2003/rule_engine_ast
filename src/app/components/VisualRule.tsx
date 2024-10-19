@@ -60,6 +60,8 @@ const VisualRule: React.FC<VisualRuleProps> = ({ ast, onClose }) => {
     return treeNode; // Return the constructed tree node
   };
 
+ 
+  
   const treeData = convertASTToTree(ast); // Convert the AST to a tree structure
 
   return (
@@ -88,26 +90,7 @@ const VisualRule: React.FC<VisualRuleProps> = ({ ast, onClose }) => {
           translate={{ x: 200, y: 40 }} 
           orientation="vertical" 
           nodeSize={{ x: 150, y: 100 }} 
-          styles={{
-            nodes: {
-              node: {
-                circle: {
-                  fill: '#FFC107', 
-                  stroke: '#FFA000', 
-                  strokeWidth: 2,
-                },
-                name: {
-                  fill: '#000', 
-                  fontSize: '12px', 
-                  fontWeight: 'bold', 
-                },
-                attributes: {
-                  fill: '#555', 
-                  fontSize: '10px',
-                },
-              },
-            },
-          } as any} // Using 'as any' to bypass type checking; 
+ // Using 'as any' to bypass type checking; 
         />
       </div>
     </div>
@@ -115,3 +98,25 @@ const VisualRule: React.FC<VisualRuleProps> = ({ ast, onClose }) => {
 };
 
 export default VisualRule;
+
+
+// styles={{
+//   nodes: {
+//     node: {
+//       circle: {
+//         fill: '#FFC107', 
+//         stroke: '#FFA000', 
+//         strokeWidth: 2,
+//       },
+//       name: {
+//         fill: '#000', 
+//         fontSize: '12px', 
+//         fontWeight: 'bold', 
+//       },
+//       attributes: {
+//         fill: '#555', 
+//         fontSize: '10px',
+//       },
+//     },
+//   },
+// } as any}

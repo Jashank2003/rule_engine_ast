@@ -156,30 +156,38 @@ export function evaluateRule(ast: ASTNode, userData: Record<string, any>): boole
 
 
 
-
-
-
-
-
-
-
-
-
 // Function to combine multiple rules into a single AST
+// utils/astUtils.ts
 export function combineRule(ruleStrings: string[], operator: 'AND' | 'OR' = 'AND'): ASTNode {
-    if (ruleStrings.length === 0) {
+  if (ruleStrings.length === 0) {
       throw new Error('No rules provided for combination');
-    }
-  
-    const asts = ruleStrings.map(ruleString => createRule(ruleString)); // Create ASTs for each rule
-  
-    // Start with the first AST
-    let combinedAST = asts[0];
-  
-    for (let i = 1; i < asts.length; i++) {
-      const newOperator = new ASTNodeImpl('operator', combinedAST, asts[i], operator);
+  }
+
+  // Remove duplicate rules to reduce redundancy
+  const uniqueRules = Array.from(new Set(ruleStrings));
+
+  const asts = uniqueRules.map(ruleString => createRule(ruleString)); // Create ASTs for each rule
+
+  // Apply heuristic: prioritize the most frequent operator
+  const operatorCount = { AND: 0, OR: 0 };
+
+  ruleStrings.forEach(rule => {
+      if (rule.includes('AND')) {
+          operatorCount.AND++;
+      } else if (rule.includes('OR')) {
+          operatorCount.OR++;
+      }
+  });
+
+  const selectedOperator = operatorCount.AND >= operatorCount.OR ? 'AND' : 'OR';
+
+  // Start with the first AST
+  let combinedAST = asts[0];
+
+  for (let i = 1; i < asts.length; i++) {
+      const newOperator = new ASTNodeImpl('operator', combinedAST, asts[i], selectedOperator);
       combinedAST = newOperator; // Combine with the next AST
-    }
-  
-    return combinedAST; // Return the combined AST
+  }
+
+  return combinedAST; // Return the root node of the combined AST
 }

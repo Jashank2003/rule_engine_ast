@@ -1,95 +1,80 @@
 "use client";
-import React, { useState, useRef, useEffect } from 'react';
-import RuleManager from './components/RuleManager';
+import React from 'react';
+import Link from 'next/link';
+import NavBar from './components/NavBar';
 
 function Page() {
-  const [showDocs, setShowDocs] = useState(false); 
-  const docsRef = useRef<HTMLDivElement>(null); 
-
-  const toggleDocs = () => {
-    setShowDocs(!showDocs); // Toggle documentation visibility
-  };
-
-  const handleClickOutside = (event: MouseEvent) => {
-    if (docsRef.current && !docsRef.current.contains(event.target as Node)) {
-      setShowDocs(false); // Close documentation
+  // Smooth scroll function
+  const handleScroll = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    event.preventDefault(); // Prevent the default anchor behavior
+    const targetId = event.currentTarget.getAttribute('href'); // Get the target ID
+  
+    // Check if targetId is not null
+    if (targetId) {
+      const targetElement = document.querySelector(targetId) as HTMLElement; // Cast to HTMLElement
+      if (targetElement) {
+        window.scrollTo({
+          top: targetElement.offsetTop, 
+          behavior: 'smooth', 
+        });
+      }
     }
   };
-
-  useEffect(() => {
-    if (showDocs) {
-      document.addEventListener('mousedown', handleClickOutside); 
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside); 
-    }
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside); 
-    };
-  }, [showDocs]);
+  
+  
 
   return (
     <>
-      <h1 className="text-5xl font-bold text-center mt-2 mx-2">Rule With AST</h1>
-      <button 
-        onClick={toggleDocs} 
-        className="absolute top-5 left-5 text-gray-700 font-semibold underline p-2 rounded"
-      >
-        {showDocs ? 'Hide Docs' : 'Show Docs'}
-      </button>
-      <div className="flex justify-center mt-10">
-        <RuleManager />
-      </div>
-      {/* Overlay Documentation */}
-      {showDocs && (
-        <div className="absolute top-0 left-0 w-full h-full flex justify-center items-center z-10 bg-black bg-opacity-50">
-          <div 
-            ref={docsRef} // Attach ref to the documentation container
-            className="bg-gray-800 text-white p-6 rounded-lg shadow-lg max-w-lg overflow-auto h-3/4"
-          >
-            <h2 className="text-2xl font-bold mb-4">Documentation</h2>
-            <p className="mb-4">To create rules, follow these guidelines:</p>
-            <ul className="list-disc list-inside mb-4">
-              <li className="mb-2">Use capital letters for keywords: <strong>AND</strong>, <strong>OR</strong></li>
-              <li className="mb-2">Use parentheses <strong>()</strong> to group expressions</li>
-              <li className="mb-2">No need to add quotes around strings, e.g., <strong>department == Sales</strong></li>
-              <li className="mb-2">Ensure valid JSON structure for input data.</li>
-            </ul>
-            <h3 className="text-xl font-bold mb-2">Examples:</h3>
-            <pre className="bg-white text-black border border-gray-300 text-wrap p-4 rounded mb-4">
-              <code>
-                {`
-1. age > 30
-2. age > 30 AND department == Sales
-3. (age > 25 OR age < 40) AND department == Sales
-4. ((age < 40 AND department == Sales) OR (age > 30 AND department == HR))
-                `}
-              </code>
-            </pre>
-            <h3 className="text-xl font-bold mb-2">Sample User Data:</h3>
-            <pre className="bg-white text-black border border-gray-300 p-4 rounded mb-4">
-              <code>
-                {`
-{
-  "users": [
-    { "age": 32, "department": "Sales" },
-    { "age": 28, "department": "HR" },
-    { "age": 45, "department": "Sales" },
-    { "age": 37, "department": "IT" }
-  ]
-}
-                `}
-              </code>
-            </pre>
-            <p className="mb-4">Once the rule is set, you can visualize the tree structure of your rule!</p>
-            <button 
-              onClick={toggleDocs} 
-              className="mt-2 bg-red-600 text-white p-2 rounded"
-            >
-              Close
-            </button>
-          </div>
+      {/* Navbar */}
+      <nav>
+        <NavBar />
+      </nav>
+
+      {/* Hero Section with Gradient Background */}
+      <section className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-black to-gray-950 text-white text-center p-10">
+        <h1 className="text-6xl font-bold mb-6">Master Complexity with Simplicity</h1>
+        <p className="text-2xl mb-10">Streamline your rule evaluation process with clarity. Effortless rule management for modern developers.</p>
+        <Link href="#links" onClick={handleScroll} className="bg-white text-black px-5 py-3 rounded-full text-lg transition-transform hover:scale-105 hover:bg-transparent hover:border hover:text-white">
+          Get Started
+        </Link>
+      </section>
+
+      {/* Links Section */}
+      <div id='links'>
+        {/* Key Functionalities and Benefits */}
+        <div className="pt-10 text-white bg-gray-950 text-center">
+          <h2 className="text-4xl font-bold mb-4">Key Functionalities and Benefits</h2>
+          <p className="text-lg mb-1">Unlock the power of our Rule Engine with Abstract Syntax Tree, designed for efficient rule evaluation and visualization.</p>
         </div>
-      )}
+
+        <section className="h-screen bg-gray-950 text-white flex items-center justify-center">
+          <div className="flex flex-col sm:flex-row sm:justify-center gap-6 w-[90vw]">
+            <Link href="/ruleeval" className="bg-black p-8 rounded-md text-left shadow-lg shadow-gray-800 transition-transform transform hover:scale-105 h-64 flex flex-col justify-between hover:border-t-2 hover:border-l-2" target='_blank'>
+              <div>
+                <h3 className="text-2xl font-bold mb-8 pl-4">Rule Evaluation</h3>
+                <p className="pl-4">Input custom rules and receive instant evaluation with high precision.</p>
+              </div>
+            </Link>
+            <Link href="#visualizeTree" className="bg-black p-8 rounded-md text-left shadow-lg shadow-gray-800 transition-transform transform hover:scale-105 h-64 flex flex-col justify-between hover:border-t-2 hover:border-l-2" target='_blank'>
+              <div>
+                <h3 className="text-2xl font-bold mb-8 pl-4">Syntax Tree Visualization</h3>
+                <p className="pl-4">Visualize complex rules with our intuitive syntax tree displays.</p>
+              </div>
+            </Link>
+            <Link href="/combinerule" className="bg-black p-8 rounded-md text-left shadow-lg shadow-gray-800 transition-transform transform hover:scale-105 h-64 flex flex-col justify-between hover:border-t-2 hover:border-l-2" target='_blank'>
+              <div>
+                <h3 className="text-2xl font-bold mb-8 pl-4">Combine Rule</h3>
+                <p className="pl-4">Consolidate multiple rules with ease, enhancing system compatibility.</p>
+              </div>
+            </Link>
+          </div>
+        </section>
+      </div>
+
+      {/* Footer */}
+      <footer className="py-5 bg-black text-white text-center">
+        <p>© 2024 Rule Engine. All rights reserved.</p>
+      </footer>
     </>
   );
 }
