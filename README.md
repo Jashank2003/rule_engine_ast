@@ -16,7 +16,7 @@ The Rule Engine is a web-based application designed to facilitate the definition
 This project utilizes `Next` for the front end and integrates the `react-d3-tree` library for visualizing the rules in a tree-like format. Users can input rules based on specific criteria, and the application will convert these rules into an Abstract Syntax Tree (AST) for visualization.
 
 
-**Live Demo:** [View the Live Application](https://rule-engine-ast-alpha.vercel.app/)
+**Live Demo:** [click me](https://rule-engine-ast-alpha.vercel.app/)
 
 ## Features
 
